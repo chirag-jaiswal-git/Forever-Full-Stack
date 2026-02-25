@@ -10,7 +10,6 @@ import orderRouter from './routes/orderRoute.js';
 
 // App config
 const app = express();
-const port = process.env.PORT || 4000;
 connectDB();
 connectCloudinary();
 
@@ -19,20 +18,14 @@ app.use(express.json());
 app.use(cors());
 
 // API Endpoints
-app.use('/api/user',userRouter)
-app.use('/api/product',productRouter)
-app.use('/api/cart',cartRouter)
-app.use('/api/order',orderRouter)
-
-
+app.use('/api/user', userRouter);
+app.use('/api/product', productRouter);
+app.use('/api/cart', cartRouter);
+app.use('/api/order', orderRouter);
 
 app.get('/', (req, res) => {
   res.status(200).send('E-commerce Backend is running');
 });
 
-// Listen
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
-
+// DO NOT CALL app.listen() — Vercel serverless handles this
 export default app;
