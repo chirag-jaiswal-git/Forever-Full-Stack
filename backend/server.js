@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import 'dotenv/config.js';
+import dotenv from 'dotenv';
 import connectDB from './config/mongodb.js';
 import connectCloudinary from './config/cloudinary.js';
 import userRouter from './routes/userRoute.js';
@@ -12,6 +12,7 @@ import orderRouter from './routes/orderRoute.js';
 const app = express();
 connectDB();
 connectCloudinary();
+dotenv.config();
 
 // Middlewares
 app.use(express.json());
