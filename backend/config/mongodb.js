@@ -1,17 +1,27 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
+
+let cached = global.mongoose;
+
+if (!cached) cached = global.mongoose = { conn: null, promise: null };
 
 const connectDB = async () => {
+  if (cached.conn) return cached.conn;
 
-  mongoose.connection.on('connected', () => {
-    console.log('Mongoose connected to DB Cluster');
-  });
+  if (!cached.promise) {
+    cached.promise = mongoose
+      .connect(`${process.env.MONGODB_URI}/e-commerce`)
+      .then((mongoose) => {
+        console.log("Mongoose connected to DB Cluster");
+        return mongoose;
+      })
+      .catch((err) => {
+        console.error("Mongoose connection error:", err);
+        throw err;
+      });
+  }
 
-  mongoose.connection.on('error', (err) => {
-    console.log(`Mongoose connection error: ${err}`);
-  });
-  
-  await mongoose.connect(`${process.env.MONGODB_URI}/e-commerce`);
- 
-}
+  cached.conn = await cached.promise;
+  return cached.conn;
+};
 
 export default connectDB;
