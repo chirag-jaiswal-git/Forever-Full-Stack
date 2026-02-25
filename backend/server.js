@@ -8,17 +8,17 @@ import productRouter from './routes/productRoute.js';
 import cartRouter from './routes/cartRoute.js';
 import orderRouter from './routes/orderRoute.js';
 
-// App config
+dotenv.config();
+
 const app = express();
 connectDB();
 connectCloudinary();
-dotenv.config();
 
 // Middlewares
 app.use(express.json());
 app.use(cors());
 
-// API Endpoints
+// API Routes
 app.use('/api/user', userRouter);
 app.use('/api/product', productRouter);
 app.use('/api/cart', cartRouter);
@@ -29,6 +29,5 @@ app.get('/', (req, res) => {
   res.status(200).send('E-commerce Backend is running');
 });
 
-// ❌ Remove app.listen() completely
-// export default app for Vercel serverless
+// ❌ DO NOT CALL app.listen() in serverless
 export default app;
