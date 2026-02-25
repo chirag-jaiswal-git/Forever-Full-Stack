@@ -23,9 +23,11 @@ app.use('/api/product', productRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/order', orderRouter);
 
+// Root endpoint
 app.get('/', (req, res) => {
   res.status(200).send('E-commerce Backend is running');
 });
 
-// DO NOT CALL app.listen() — Vercel serverless handles this
+// ❌ Remove app.listen() completely
+// export default app for Vercel serverless
 export default app;
