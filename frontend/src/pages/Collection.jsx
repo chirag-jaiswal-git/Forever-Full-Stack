@@ -157,7 +157,7 @@ const Collection = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
           {filterProducts.length ? (
             filterProducts.map((item) => (
-              <Productitem
+              <ProductItem
                 key={item._id}
                 id={item._id}
                 images={item.images}

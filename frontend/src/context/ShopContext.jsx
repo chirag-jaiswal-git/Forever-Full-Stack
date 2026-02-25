@@ -17,6 +17,7 @@ const ShopContextProvider = (props) => {
   const [token,setToken] = useState(localStorage.getItem("token"));
 
   const navigate = useNavigate();
+  console.log("Backend URL:", backendURL);
 
 const addToCart = async(itemId,size) => {
 
